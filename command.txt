@@ -1,0 +1,31 @@
+mkdir XX #创建一个本地目录XX
+git init #把当前目录变成可以管理的git仓库，生成.git文件
+git add xx #把xx文件添加到暂存区去
+git commit -m "xx" #提交文件，-m 后面是注释
+git status #查看仓库状态
+git diff xx #查看xx文件修改了哪些内容
+git log #查看历史记录
+git log --pretty=oneline #简化显示历史记录
+git reset --hard HEAD^或者git reset --hard HEAD~ #回退到上一个版本（回退版本^表示一个^^表示两个……，~100表示回退到100个版本）
+git reflog #查看历史记录的版本号id
+git reset --hard 版本号ID #通过版本号回退恢复
+git checkout --xx #把xx文件在工作区的修改全部撤掉
+git rm xx #删除xx文件
+
+
+远程仓库
+确保用户主目录下有.ssh目录，如果没有打开命令行，输入如下命令：
+ssh-keygen -t rsa -C "youreamil@example.com"
+登录GitHub，打开setting中的ssh keys页面 点击 add ssh key,填上任意的title，在key文本框里粘贴id_rsa.pub
+文件的内容，之后点击add key 就可以了
+
+添加远程库：
+在GitHub上创建一个repository
+复制https://github.com/johnxchen/testgit.git
+在本地testgit仓库下执行
+git push -u origin master
+由于远程库是空的，第一次推送master分支加上了-u参数，使得本地master与远程master相关联
+以后只要本地做了提交，就可以通过：git push orign master 把本地master分支推送到GitHub
+注意：要推送的master不能为空，下面的文件要确定 git add 和 git commit
+
+
