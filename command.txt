@@ -23,9 +23,77 @@ ssh-keygen -t rsa -C "youreamil@example.com"
 在GitHub上创建一个repository
 复制https://github.com/johnxchen/testgit.git
 在本地testgit仓库下执行
+git remote add origin https://github.com/johnxchen/testgit.git
 git push -u origin master
 由于远程库是空的，第一次推送master分支加上了-u参数，使得本地master与远程master相关联
 以后只要本地做了提交，就可以通过：git push orign master 把本地master分支推送到GitHub
-注意：要推送的master不能为空，下面的文件要确定 git add 和 git commit
+注意：要推送的master不能为空，下面的文件要确定 git add 和 git commit -m
+
+如何克隆远程仓库
+使用命令 git clone
+如：
+git clone https://github.com/johnxchen/testgit.git
+
+创建与合并分支
+git checkout 命令加上 -b参数表示创建分支并切换
+相当于：
+git branch xx
+git checkout xx
+
+git branch 查看分支
+git merge xx 合并分支xx到master
+
+git branch -d xx 删除分支 xx
+
+
+如何解决冲突
+修改分支与主干一样就可以了
+git merge --no-ff -m "注释" xx #合并分支xx --no-ff表示禁用fast forward（此模式删除分支就没分支信息了）
+
+git branch -d xx 删除分支
+
+通过 git log --graph --pretty=oneline --abbrev-commit 还能够看到被删除的分支信息还在
+
+
+bug 分支
+
+处理临时bug工作
+
+
+git stash 将当前的工作现场隐藏起来
+
+git checkout -b xxx
+进入xxx分支修改bug
+然后git add  git commit -m
+最后 git checkout master 分支合并bug分支
+git merge --no-ff -m "合并bug分支" xxx
+删除 bug分支
+git branch -d xxx
+返回 xx 分支
+git checkout xx
+查看工作现场 git stash list
+两种方式恢复现场
+1,git stash apply恢复，stash内容并不删除，需要使用git stash drop 删除
+2，使用git stash pop,恢复的同时把stash内容也删除了
+
+
+
+
+多人协作
+
+
+查看远程库的信息 git remote
+查看远程库的详细信息 gitremote -v
+
+推送分支
+git push origin dev
+
+创建远程origin的dev分支到本地来
+git checkout -b dev origin/dev
+
+多人协作提交冲突
+根据提示使用命令 git pull.....
+如果不成功使用 git pull
+然后修改 文件 add， commit，最后push到分支上
 
 
